@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields
 
 import 'package:flutter/material.dart';
 
+import 'package:http_app/ui/results_screen.dart';
+
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  TextEditingController _username = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class HomeScreen extends StatelessWidget {
                       height: 30.0,
                     ),
                     TextField(
+                      controller: _username,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide:
@@ -51,9 +54,15 @@ class HomeScreen extends StatelessWidget {
                           foregroundColor: Colors.white,
                           minimumSize: Size.fromHeight(50) // foreground
                           ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResultsScreen(
+                                    username: _username.value.text)));
+                      },
                       child: Text(
-                        'Search',
+                        'Pesquisar',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),
